@@ -42,3 +42,43 @@ def clean_text(text, default="未填寫"):
     if cleaned == "":
         return default
     return cleaned
+
+def clean_expense(raw):
+    """
+    處理一筆原始支出：
+    - 清理日期、類別與備註
+    - 將金額轉成 float
+    - 回傳一個新的整理後 Dictionary
+    """
+    return {
+        "date": clean_text(raw.get("date", "")),
+        "category": clean_text(raw.get("category", "")),
+        "amount": float(raw.get("amount", 0)),
+        "note": clean_text(raw.get("note", "")),
+    }
+
+def clean_expenses(raw_list):
+    """
+    處理多筆原始支出：
+    - 建立空的 expenses List
+    - 使用 for 逐筆呼叫 clean_expense()
+    - 使用 append() 保存每筆整理後資料
+    - 回傳 expenses
+    """
+    expenses = []
+    for raw in raw_list:
+        cleaned_item = clean_expense(raw)
+        expenses.append(cleaned_item)
+    return expenses
+
+
+# 1. 讀取預算（存入變數備用）
+budget = float(input("請輸入本月預算："))
+
+# 2. 呼叫 clean_expenses 進行資料清洗
+expenses = clean_expenses(raw_expenses)
+
+# 3. 印出清洗後的結果來檢查
+print("\n--- 清洗後的資料檢查 ---")
+for item in expenses:
+    print(item)
