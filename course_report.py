@@ -30,3 +30,15 @@ raw_expenses = [
     },
 ]
 input("請輸入本月預算：")
+
+def clean_text(text, default="未填寫"):
+    """
+    清理文字：
+    1. 移除前後空白。
+    2. 若清理後為空字串，則回傳指定的預設值。
+    3. 否則回傳清理後的文字。
+    """
+    cleaned = text.strip()
+    if cleaned == "":
+        return default
+    return cleaned
