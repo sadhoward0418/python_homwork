@@ -29,7 +29,7 @@ raw_expenses = [
         "amount": "60",
     },
 ]
-input("請輸入本月預算：")
+
 
 def clean_text(text, default="未填寫"):
     """
