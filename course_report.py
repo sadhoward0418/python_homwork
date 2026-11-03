@@ -82,3 +82,32 @@ expenses = clean_expenses(raw_expenses)
 print("\n--- 清洗後的資料檢查 ---")
 for item in expenses:
     print(item)
+
+def get_amount(expense):
+    """
+    取得一筆支出的金額：
+    - 輸入：一筆整理後的支出 Dictionary
+    - 回傳 amount
+    - 提供給 sorted() 作為排序依據
+    """
+    return expense["amount"]
+
+
+def validate_expense(expense):
+    """
+    檢查一筆整理後的支出：
+    - 日期不可為空白
+    - 類別不可為空白
+    - 金額必須大於 0
+    - 備註不可為空白
+    - 回傳 True 或 False
+    """
+    if not expense["date"]:
+        return False
+    if not expense["category"]:
+        return False
+    if expense["amount"] <= 0:
+        return False
+    if not expense["note"]:
+        return False
+    return True
